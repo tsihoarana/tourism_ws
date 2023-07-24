@@ -2,6 +2,7 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   nom: {
@@ -43,6 +44,28 @@ userSchema.methods.generateAuthToken = function() {
   );
   return token;
 };
+
+userSchema.methods.setNom = function(nom) {
+  if (nom)
+    this.nom = nom;
+}
+
+userSchema.methods.setPrenom = function(prenom) {
+  if (prenom)
+    this.prenom = prenom;
+}
+
+userSchema.methods.setEmail = function(email) {
+  if (email)
+    this.email = email;
+}
+
+userSchema.methods.setPassword = async function(password) {
+  if (password) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(password, salt)
+  }
+}
 
 const User = mongoose.model("User", userSchema);
 
@@ -87,6 +110,43 @@ function validateUser(user) {
   return Joi.validate(user, schema);
 }
 
+function validateUpdateUser(user) {
+  const schema = {
+    nom: Joi.string()
+      .min(2)
+      .max(50)
+      .options({
+        language: {
+          string: { min: 'doit être 3 Characteres minimum' , max: 'doit etre 50 Characteres maximum'},
+        },
+      }),
+    prenom: Joi.string()
+      .min(2)
+      .max(50)
+      .options({
+        language: {
+          string: { min: 'doit être 3 Characteres minimum' , max: 'doit etre 50 Characteres maximum'},
+        },
+      }),
+    email: Joi.string()
+      .min(5)
+      .max(255)
+      .email(),
+    password: Joi.string()
+      .min(5)
+      .max(255)
+      .label('mot de passe')
+      .options({
+        language: {
+          string: { min: 'doit être 5 Characteres minimum' , max: 'doit etre 255 Characteres maximum'},
+        },
+      })
+  };
+
+  return Joi.validate(user, schema);
+}
+
 exports.User = User;
 exports.validate = validateUser;
+exports.validateUpdate = validateUpdateUser;
 exports.userSchema = userSchema;

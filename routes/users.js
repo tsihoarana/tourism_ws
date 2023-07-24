@@ -2,11 +2,14 @@ const auth = require("../middleware/auth");
 const validateObjectId = require("../middleware/validateObjectId");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
-const { User, validate } = require("../models/user");
+const { User, validate, validateUpdate } = require("../models/user");
 const CustomResponse = require("../models/customResponse");
 const express = require("express");
 const router = express.Router();
 
+/*
+  display infos of authenticated user
+*/
 router.get("/me", auth, async (req, res) => {
   let user = await User.findById(req.user._id).select("-password");
   user = _.pick(user, ["_id", "nom", "prenom", "email"]);
@@ -15,6 +18,9 @@ router.get("/me", auth, async (req, res) => {
   res.send(customResponse);
 });
 
+/*
+  register 
+*/
 router.post("/", async (req, res) => {
   let customResponse = {};
 
@@ -39,7 +45,31 @@ router.post("/", async (req, res) => {
   const token = user.generateAuthToken();
   user = _.pick(user, ["_id", "nom", "prenom", "email"]);
 
-  customResponse = new CustomResponse(200, '', {token, user});
+  customResponse = new CustomResponse(200, 'Inscription réussi', {token, user});
+  res.send(customResponse);
+});
+
+/* 
+  update infos of authenticated user
+*/
+router.put("/update", auth, async (req, res) => {
+  let customResponse = {};
+  
+  const { error } = validateUpdate(req.body);
+  if (error) {
+    customResponse = new CustomResponse(400, error.details[0].message);
+    return res.send(customResponse);
+  }
+
+  let user = await User.findById(req.user._id);
+  user.setNom(req.body.nom);
+  user.setPrenom(req.body.prenom);
+  user.setEmail(req.body.email);
+  await user.setPassword(req.body.password);
+  await user.save();
+
+  user = _.pick(user, ["_id", "nom", "prenom", "email"]);
+  customResponse = new CustomResponse(200, 'Modification de vos informations réussi', user);
   res.send(customResponse);
 });
 
