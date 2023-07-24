@@ -1,0 +1,8 @@
+{
+  "jwtPrivateKey": "tourism_jwtPrivateKey",
+  "db": "tourism_db",
+  "email_user": "tourism_email_user",
+  "email_pass": "tourism_email_pass",
+  "site": "tourism_site",
+  "logo_url": "tourism_logo_url" 
+}
