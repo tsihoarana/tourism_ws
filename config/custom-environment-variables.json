@@ -4,5 +4,6 @@
   "email_user": "tourism_email_user",
   "email_pass": "tourism_email_pass",
   "site": "tourism_site",
-  "logo_url": "tourism_logo_url" 
+  "logo_url": "tourism_logo_url",
+  "media_url": "tourism_media_url"
 }

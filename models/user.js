@@ -48,24 +48,24 @@ userSchema.methods.generateAuthToken = function() {
 userSchema.methods.setNom = function(nom) {
   if (nom)
     this.nom = nom;
-}
+};
 
 userSchema.methods.setPrenom = function(prenom) {
   if (prenom)
     this.prenom = prenom;
-}
+};
 
 userSchema.methods.setEmail = function(email) {
   if (email)
     this.email = email;
-}
+};
 
 userSchema.methods.setPassword = async function(password) {
   if (password) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(password, salt)
   }
-}
+};
 
 const User = mongoose.model("User", userSchema);
 
