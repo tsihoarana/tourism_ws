@@ -4,3 +4,4 @@ coverage/
 logfile.log
 uncaughtExceptions.log
 run.sh
+run_online.sh
