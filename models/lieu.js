@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const lieuSchema = new mongoose.Schema({
+  idProvince: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
+  },
   nom: {
     type: String,
     required: true,
