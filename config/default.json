@@ -3,5 +3,5 @@
   "db": "mongodb://127.0.0.1/tourism",
   "port": "3900",
   "requiresAuth": false,
-  "media_url": "http://localhost:3900/api/public/videos/"
+  "media_url": "http://localhost:3900/api/public/"
 }

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const lieuSchema = new mongoose.Schema({
-  idProvince: {
+  idprovince: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
