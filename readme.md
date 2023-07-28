@@ -6,7 +6,7 @@ From the project folder, install the dependencies:
 
 ### Start the Server
 
-    node index.js
+    npm start
 
 This will launch the Node server on port 3900. If that port is busy, you can set a different point in config/default.json.
 
