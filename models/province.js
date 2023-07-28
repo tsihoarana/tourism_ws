@@ -13,6 +13,12 @@ const provinceSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 512
   },
+  pdp: {
+    type: String
+  },
+  pdc: {
+    type: String
+  },
   liens: [String],
   images: [String],
   videos: [String]
