@@ -10,4 +10,11 @@ const router = express.Router();
 */
 router.use("/videos",  express.static("public/videos"));
 
+/*
+  allow requests to public/images/{province_folder}/{file}
+*/
+router.use("/images/antananarivo",  express.static("public/images/antananarivo"));
+router.use("/images/antsiranana",  express.static("public/images/antsiranana"));
+router.use("/images/toamasina",  express.static("public/images/toamasina"));
+
 module.exports = router;

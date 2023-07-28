@@ -11,7 +11,7 @@ const router = express.Router();
 */
 router.get("/", auth, async (req, res) => {
   console.log("lolllll");
-  const provinces = await Province.find();
+  const provinces = await Province.get();
 
   const customResponse = new CustomResponse(200, '', provinces);
   res.send(customResponse);

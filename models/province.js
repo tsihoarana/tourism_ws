@@ -16,6 +16,15 @@ const provinceSchema = new mongoose.Schema({
   }
 });
 
+provinceSchema.statics.get = async function (query) {
+  let lieus = await this.find(query).lean().exec();
+  
+  return lieus.map(obj => ({ ...obj, 
+                    pdp: config.get("media_url") + obj.pdp,
+                    pdc: config.get("media_url") + obj.pdc
+                  }));
+};
+
 const Province = mongoose.model("Province", provinceSchema);
 
 exports.Province = Province;
