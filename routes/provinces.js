@@ -16,4 +16,14 @@ router.get("/", auth, async (req, res) => {
   res.send(customResponse);
 });
 
+/*
+  return one province
+*/
+router.get("/:id", auth, async (req, res) => {
+  const province = await Province.getOne({ _id: req.params.id });
+
+  const customResponse = new CustomResponse(200, '', province);
+  res.send(customResponse);
+});
+
 module.exports = router;
