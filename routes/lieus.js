@@ -10,7 +10,10 @@ const router = express.Router();
   return all lieu
 */
 router.get("/", auth, async (req, res) => {
-  const lieus = await Lieu.find();
+  const search_key = req.query.search
+  const search_query = search_key ? {nom: { $regex: '.*' + search_key + '.*', $options: 'i'} } : {};
+  console.log(search_query);
+  const lieus = await Lieu.get(search_query);
 
   const customResponse = new CustomResponse(200, '', lieus);
   res.send(customResponse);
