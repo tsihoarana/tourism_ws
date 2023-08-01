@@ -32,8 +32,8 @@ router.post('/', async (req, res) => {
   }
 
   const token = user.generateAuthToken();
-  user = _.pick(user, ["_id", "nom", "prenom", "email"]);
-  customResponse = new CustomResponse(200, '', {token, user});
+  // user = _.pick(user, ["_id", "nom", "prenom", "email"]);
+  customResponse = new CustomResponse(200, 'asdf', { token });
 
   res.send(customResponse);
 });

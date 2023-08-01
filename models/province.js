@@ -38,8 +38,8 @@ provinceSchema.statics.getOne = async function (query) {
   let province = await this.findOne(query).lean().exec();
 
   return { ...province, 
-              pdp: config.get("media_url") + obj.pdp,
-              pdc: config.get("media_url") + obj.pdc,
+              pdp: config.get("media_url") + province.pdp,
+              pdc: config.get("media_url") + province.pdc,
               videos:province.videos.map(item => config.get("media_url") + item) 
   };
 };

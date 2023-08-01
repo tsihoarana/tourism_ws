@@ -23,7 +23,7 @@ router.get("/", auth, async (req, res) => {
   return a list of lieu by idProvince
 */
 router.get("/:idprovince", auth, async (req, res) => {
-    const lieus = await Lieu.get({ idprovince: req.params.idprovince });
+    const lieus = await Lieu.getOne({ idprovince: req.params.idprovince });
   
     const customResponse = new CustomResponse(200, '', lieus);
     res.send(customResponse);

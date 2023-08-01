@@ -31,6 +31,15 @@ lieuSchema.statics.get = async function (query) {
                   }));
 };
 
+lieuSchema.statics.getOne = async function (query) {
+  let lieu = await this.findOne(query).lean().exec();
+  
+  return { ...lieu, 
+                    pdp: config.get("media_url") + lieu.pdp,
+                    pdc: config.get("media_url") + lieu.pdc
+                  };
+};
+
 const Lieu = mongoose.model("Lieu", lieuSchema);
 
 exports.Lieu = Lieu;
