@@ -16,5 +16,8 @@ router.use("/videos",  express.static("public/videos"));
 router.use("/images/antananarivo",  express.static("public/images/antananarivo"));
 router.use("/images/antsiranana",  express.static("public/images/antsiranana"));
 router.use("/images/toamasina",  express.static("public/images/toamasina"));
+router.use("/images/mahajanga",  express.static("public/images/mahajanga"));
+router.use("/images/fianarantsoa",  express.static("public/images/fianarantsoa"));
+router.use("/images/toliara",  express.static("public/images/toliara"));
 
 module.exports = router;
